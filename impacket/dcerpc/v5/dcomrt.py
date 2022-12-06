@@ -1266,7 +1266,7 @@ class INTERFACE:
                     # Does this match exactly what get_target() returns?
                     LOG.debug('StringBinding: %s' % strBinding['aNetworkAddr'])
                     if strBinding['wTowerId'] == 7:
-                        print(f'SMB strBinding: {strBinding['aNetworkAddr']}')
+                        print(f'SMB strBinding: {strBinding["aNetworkAddr"]}')
                         # If there's port information, let's strip it for now.
                         if strBinding['aNetworkAddr'].find('[') >= 0:
                             binding, _, bindingPort = strBinding['aNetworkAddr'].partition('[')
