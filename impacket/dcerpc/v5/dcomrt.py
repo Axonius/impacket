@@ -1232,25 +1232,32 @@ class INTERFACE:
         return False
 
     def connect(self, iid = None):
+        print('SMB connect')
         if (self.__target in INTERFACE.CONNECTIONS) is True:
+            print('SMB Thread satrt')
             if current_thread().name in INTERFACE.CONNECTIONS[self.__target] and \
                             (self.__oxid in INTERFACE.CONNECTIONS[self.__target][current_thread().name]) is True:
+                print('SMB DCE satrt')
                 dce = INTERFACE.CONNECTIONS[self.__target][current_thread().name][self.__oxid]['dce']
                 currentBinding = INTERFACE.CONNECTIONS[self.__target][current_thread().name][self.__oxid]['currentBinding']
                 if currentBinding == iid:
                     # We don't need to alter_ctx
                     pass
                 else:
+                    print('SMB NEW DCE satrt')
                     newDce = dce.alter_ctx(iid)
                     INTERFACE.CONNECTIONS[self.__target][current_thread().name][self.__oxid]['dce'] = newDce
                     INTERFACE.CONNECTIONS[self.__target][current_thread().name][self.__oxid]['currentBinding'] = iid
             else:
+                print('SMB stringBindings')
                 stringBindings = self.get_cinstance().get_string_bindings()
+                print(f'SMB stringBindings: {stringBindings}')
                 # No OXID present, we should create a new connection and store it
                 stringBinding = None
                 isTargetFQDN = self.is_fqdn()
                 LOG.debug('Target system is %s and isFQDN is %s' % (self.get_target(), isTargetFQDN))
                 for strBinding in stringBindings:
+                    print(f'SMB strBinding: {strBinding}')
                     # Here, depending on the get_target() value several things can happen
                     # 1) it's an IPv4 address
                     # 2) it's an IPv6 address
@@ -1259,16 +1266,20 @@ class INTERFACE:
                     # Does this match exactly what get_target() returns?
                     LOG.debug('StringBinding: %s' % strBinding['aNetworkAddr'])
                     if strBinding['wTowerId'] == 7:
+                        print(f'SMB strBinding: {strBinding['aNetworkAddr']}')
                         # If there's port information, let's strip it for now.
                         if strBinding['aNetworkAddr'].find('[') >= 0:
                             binding, _, bindingPort = strBinding['aNetworkAddr'].partition('[')
                             bindingPort = '[' + bindingPort
+                            print(f'SMB strBinding port: {bindingPort}')
                         else:
                             binding = strBinding['aNetworkAddr']
                             bindingPort = ''
+                            print(f'SMB strBinding without port: {binding}')
 
                         if binding.upper().find(self.get_target().upper()) >= 0:
                             stringBinding = 'ncacn_ip_tcp:' + strBinding['aNetworkAddr'][:-1]
+                            print(f'SMB stringBinding break: {stringBinding}')
                             break
                         # If get_target() is a FQDN, does it match the hostname?
                         elif isTargetFQDN and binding.upper().find(self.get_target().upper().partition('.')[0]) >= 0:
@@ -1278,6 +1289,7 @@ class INTERFACE:
                             # aNetworkAddr is usually the NetBIOS name and unless you have your DNS resolver
                             # with the right suffixes it will probably not resolve right.
                             stringBinding = 'ncacn_ip_tcp:%s%s' % (self.get_target(), bindingPort)
+                            print(f'SMB stringBinding: {stringBinding}')
                             break
 
                 LOG.debug('StringBinding chosen: %s' % stringBinding)
