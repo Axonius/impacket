@@ -1249,12 +1249,13 @@ class INTERFACE:
                     INTERFACE.CONNECTIONS[self.__target][current_thread().name][self.__oxid]['dce'] = newDce
                     INTERFACE.CONNECTIONS[self.__target][current_thread().name][self.__oxid]['currentBinding'] = iid
             else:
-                print('SMB stringBindings')
                 stringBindings = self.get_cinstance().get_string_bindings()
                 print(f'SMB stringBindings: {stringBindings}')
                 # No OXID present, we should create a new connection and store it
                 stringBinding = None
                 isTargetFQDN = self.is_fqdn()
+                print(f'SMB isTargetFQDN: {isTargetFQDN}')
+                print(f'SMB isTargetFQDN: {self.get_target()}')
                 LOG.debug('Target system is %s and isFQDN is %s' % (self.get_target(), isTargetFQDN))
                 for strBinding in stringBindings:
                     print(f'SMB strBinding: {strBinding}')
@@ -1297,6 +1298,8 @@ class INTERFACE:
                     # Something wen't wrong, let's just report it
                     stringBinding = 'ncacn_ip_tcp:%s%s' % (self.get_target(), bindingPort)
                     print(stringBinding)
+                
+                print(stringBinding)
 
                 dcomInterface = transport.DCERPCTransportFactory(stringBinding)
                 if hasattr(dcomInterface, 'set_credentials'):
@@ -1308,6 +1311,7 @@ class INTERFACE:
                 dce = dcomInterface.get_dce_rpc()
 
                 if iid is None:
+                    print('raise IID is None')
                     raise Exception('IID is None')
                 else:
                     dce.set_auth_level(self.__cinstance.get_auth_level())
@@ -1316,6 +1320,7 @@ class INTERFACE:
                 dce.connect()
 
                 if iid is None:
+                    print('raise IID is None')
                     raise Exception('IID is None')
                 else:
                     dce.bind(iid)
@@ -1323,12 +1328,14 @@ class INTERFACE:
                 if self.__oxid is None:
                     #import traceback
                     #traceback.print_stack()
+                    print('raise OXID NONE')
                     raise Exception("OXID NONE, something wrong!!!")
 
                 INTERFACE.CONNECTIONS[self.__target][current_thread().name] = {}
                 INTERFACE.CONNECTIONS[self.__target][current_thread().name][self.__oxid] = {}
                 INTERFACE.CONNECTIONS[self.__target][current_thread().name][self.__oxid]['dce'] = dce
                 INTERFACE.CONNECTIONS[self.__target][current_thread().name][self.__oxid]['currentBinding'] = iid
+                print('END SMB CONNECTION')
         else:
             # No connection created
             raise Exception('No connection created')
