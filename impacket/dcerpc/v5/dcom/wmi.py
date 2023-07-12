@@ -2461,9 +2461,7 @@ class IWbemClassObject(IRemUnknown):
                     ndTable |= self.__ndEntry(i, True, True)
             else:
                 if itemValue == '':
-                    # https://github.com/SecureAuthCorp/impacket/pull/1069#issuecomment-835179409
-                    # Force inherited_default to avoid 'obscure' issue in wmipersist.py
-                    ndTable |= self.__ndEntry(i, True, True)
+                    ndTable |= 1 << (2*i)
                     valueTable += pack('<L', 0)
                 else:
                     strIn = ENCODED_STRING()
