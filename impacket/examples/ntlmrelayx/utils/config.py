@@ -1,17 +1,23 @@
-# SECUREAUTH LABS. Copyright 2018 SecureAuth Corporation. All rights reserved.
+# Impacket - Collection of Python classes for working with network protocols.
 #
-# This software is provided under under a slightly modified version
+# SECUREAUTH LABS. Copyright (C) 2021 SecureAuth Corporation. All rights reserved.
+#
+# This software is provided under a slightly modified version
 # of the Apache Software License. See the accompanying LICENSE file
 # for more information.
 #
-# Config utilities
+# Description:
+#   Config utilities
+#
+#   Configuration class which holds the config specified on the
+#   command line, this can be passed to the tools' servers and clients
 #
 # Author:
 #  Dirk-jan Mollema / Fox-IT (https://www.fox-it.com)
 #
-# Description:
-#     Configuration class which holds the config specified on the
-# command line, this can be passed to the tools' servers and clients
+from impacket.examples.utils import parse_credentials
+
+
 class NTLMRelayxConfig:
     def __init__(self):
 
@@ -87,6 +93,10 @@ class NTLMRelayxConfig:
 
         # WebDAV options
         self.serve_image = False
+
+        # AD CS attack options
+        self.isADCSAttack = False
+        self.template = None
 
     def setSMBChallenge(self, value):
         self.SMBServerChallenge = value
@@ -168,10 +178,7 @@ class NTLMRelayxConfig:
     def setRPCOptions(self, rpc_mode, rpc_use_smb, auth_smb, hashes_smb, rpc_smb_port):
         self.rpc_mode = rpc_mode
         self.rpc_use_smb = rpc_use_smb
-
-        import re
-        auth_re = re.compile('(?:(?:([^/:]*)/)?([^:]*)(?::(.*))?)?')
-        self.smbdomain, self.smbuser, self.smbpass =  auth_re.match(auth_smb).groups('')
+        self.smbdomain, self.smbuser, self.smbpass = parse_credentials(auth_smb)
 
         if hashes_smb is not None:
             self.smblmhash, self.smbnthash = hashes_smb.split(':')
@@ -205,3 +212,9 @@ class NTLMRelayxConfig:
 
     def setWebDAVOptions(self, serve_image):
         self.serve_image = serve_image
+
+    def setADCSOptions(self, template):
+        self.template = template
+
+    def setIsADCSAttack(self, isADCSAttack):
+        self.isADCSAttack = isADCSAttack
