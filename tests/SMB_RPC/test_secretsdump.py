@@ -309,4 +309,6 @@ class Tests(SecretsDumpTests, unittest.TestCase):
 
 
 if __name__ == "__main__":
-    unittest.main(verbosity=1)
+    suite = unittest.TestLoader().loadTestsFromTestCase(Tests)
+    unittest.main(defaultTest='suite')
+

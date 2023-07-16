@@ -23,7 +23,7 @@ PACKAGE_NAME = "impacket"
 VER_MAJOR = 0
 VER_MINOR = 9
 VER_MAINT = 24
-VER_PREREL = "dev1"
+VER_PREREL = ""
 try:
     if call(["git", "branch"], stderr=STDOUT, stdout=open(os.devnull, 'w')) == 0:
         p = Popen("git log -1 --format=%cd --date=format:%Y%m%d.%H%M%S", shell=True, stdin=PIPE, stderr=PIPE, stdout=PIPE)
@@ -50,7 +50,7 @@ def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup(name = PACKAGE_NAME,
-      version = "{}.{}.{}.{}{}".format(VER_MAJOR,VER_MINOR,VER_MAINT,VER_PREREL,VER_LOCAL),
+      version = "{}.{}.{}".format(VER_MAJOR, VER_MINOR, VER_MAINT),
       description = "Network protocols Constructors and Dissectors",
       url = "https://www.secureauth.com/labs/open-source-tools/impacket",
       author = "SecureAuth Corporation",
@@ -62,10 +62,7 @@ setup(name = PACKAGE_NAME,
       long_description_content_type="text/markdown",
       platforms = ["Unix","Windows"],
       packages=['impacket', 'impacket.dcerpc', 'impacket.examples', 'impacket.dcerpc.v5', 'impacket.dcerpc.v5.dcom',
-                'impacket.krb5', 'impacket.ldap', 'impacket.examples.ntlmrelayx',
-                'impacket.examples.ntlmrelayx.clients', 'impacket.examples.ntlmrelayx.servers',
-                'impacket.examples.ntlmrelayx.servers.socksplugins', 'impacket.examples.ntlmrelayx.utils',
-                'impacket.examples.ntlmrelayx.attacks'],
+                'impacket.krb5', 'impacket.ldap'],
       scripts = glob.glob(os.path.join('examples', '*.py')),
       data_files = data_files,
       install_requires=['pyasn1>=0.2.3', 'pycryptodomex', 'pyOpenSSL>=0.16.2', 'six', 'ldap3>=2.5,!=2.5.2,!=2.5.0,!=2.6',
