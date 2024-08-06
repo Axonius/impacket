@@ -1233,7 +1233,6 @@ class INTERFACE:
 
     def connect(self, iid = None):
         if (self.__target in INTERFACE.CONNECTIONS) is True:
-            print('SMB Thread satrt')
             if current_thread().name in INTERFACE.CONNECTIONS[self.__target] and \
                             (self.__oxid in INTERFACE.CONNECTIONS[self.__target][current_thread().name]) is True:
                 dce = INTERFACE.CONNECTIONS[self.__target][current_thread().name][self.__oxid]['dce']
