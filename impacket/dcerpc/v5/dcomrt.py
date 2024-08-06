@@ -1316,7 +1316,6 @@ class INTERFACE:
                 if self.__oxid is None:
                     #import traceback
                     #traceback.print_stack()
-                    print('raise OXID NONE')
                     raise Exception("OXID NONE, something wrong!!!")
 
                 INTERFACE.CONNECTIONS[self.__target][current_thread().name] = {}
