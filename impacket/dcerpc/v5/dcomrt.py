@@ -1251,7 +1251,6 @@ class INTERFACE:
                 isTargetFQDN = self.is_fqdn()
                 LOG.debug('Target system is %s and isFQDN is %s' % (self.get_target(), isTargetFQDN))
                 for strBinding in stringBindings:
-                    print(f'SMB strBinding: {strBinding}')
                     # Here, depending on the get_target() value several things can happen
                     # 1) it's an IPv4 address
                     # 2) it's an IPv6 address
