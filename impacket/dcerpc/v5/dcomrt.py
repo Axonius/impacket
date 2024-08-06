@@ -1291,9 +1291,6 @@ class INTERFACE:
                 if stringBinding is None:
                     # Something wen't wrong, let's just report it
                     stringBinding = 'ncacn_ip_tcp:%s%s' % (self.get_target(), bindingPort)
-                    print(stringBinding)
-                
-                print(stringBinding)
 
                 dcomInterface = transport.DCERPCTransportFactory(stringBinding)
                 if hasattr(dcomInterface, 'set_credentials'):
