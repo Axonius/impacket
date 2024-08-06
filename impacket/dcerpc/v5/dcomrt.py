@@ -1309,7 +1309,6 @@ class INTERFACE:
                 dce.connect()
 
                 if iid is None:
-                    print('raise IID is None')
                     raise Exception('IID is None')
                 else:
                     dce.bind(iid)
