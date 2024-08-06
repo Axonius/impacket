@@ -1322,7 +1322,6 @@ class INTERFACE:
                 INTERFACE.CONNECTIONS[self.__target][current_thread().name][self.__oxid] = {}
                 INTERFACE.CONNECTIONS[self.__target][current_thread().name][self.__oxid]['dce'] = dce
                 INTERFACE.CONNECTIONS[self.__target][current_thread().name][self.__oxid]['currentBinding'] = iid
-                print('END SMB CONNECTION')
         else:
             # No connection created
             raise Exception('No connection created')
