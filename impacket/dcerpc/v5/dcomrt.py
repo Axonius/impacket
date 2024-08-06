@@ -1278,7 +1278,6 @@ class INTERFACE:
                             # aNetworkAddr is usually the NetBIOS name and unless you have your DNS resolver
                             # with the right suffixes it will probably not resolve right.
                             stringBinding = 'ncacn_ip_tcp:%s%s' % (self.get_target(), bindingPort)
-                            print(f'SMB stringBinding: {stringBinding}')
                             break
 
                 LOG.debug('StringBinding chosen: %s' % stringBinding)
