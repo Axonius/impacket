@@ -1266,7 +1266,6 @@ class INTERFACE:
                         else:
                             binding = strBinding['aNetworkAddr']
                             bindingPort = ''
-                            print(f'SMB strBinding without port: {binding}')
 
                         if binding.upper().find(self.get_target().upper()) >= 0:
                             stringBinding = 'ncacn_ip_tcp:' + strBinding['aNetworkAddr'][:-1]
