@@ -1250,8 +1250,6 @@ class INTERFACE:
                 # No OXID present, we should create a new connection and store it
                 stringBinding = None
                 isTargetFQDN = self.is_fqdn()
-                print(f'SMB isTargetFQDN: {isTargetFQDN}')
-                print(f'SMB isTargetFQDN: {self.get_target()}')
                 LOG.debug('Target system is %s and isFQDN is %s' % (self.get_target(), isTargetFQDN))
                 for strBinding in stringBindings:
                     print(f'SMB strBinding: {strBinding}')
