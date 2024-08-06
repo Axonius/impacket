@@ -1269,7 +1269,6 @@ class INTERFACE:
 
                         if binding.upper().find(self.get_target().upper()) >= 0:
                             stringBinding = 'ncacn_ip_tcp:' + strBinding['aNetworkAddr'][:-1]
-                            print(f'SMB stringBinding break: {stringBinding}')
                             break
                         # If get_target() is a FQDN, does it match the hostname?
                         elif isTargetFQDN and binding.upper().find(self.get_target().upper().partition('.')[0]) >= 0:
