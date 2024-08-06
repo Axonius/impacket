@@ -1232,7 +1232,6 @@ class INTERFACE:
         return False
 
     def connect(self, iid = None):
-        print('SMB connect')
         if (self.__target in INTERFACE.CONNECTIONS) is True:
             print('SMB Thread satrt')
             if current_thread().name in INTERFACE.CONNECTIONS[self.__target] and \
