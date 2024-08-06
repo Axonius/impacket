@@ -1242,7 +1242,6 @@ class INTERFACE:
                     # We don't need to alter_ctx
                     pass
                 else:
-                    print('SMB NEW DCE satrt')
                     newDce = dce.alter_ctx(iid)
                     INTERFACE.CONNECTIONS[self.__target][current_thread().name][self.__oxid]['dce'] = newDce
                     INTERFACE.CONNECTIONS[self.__target][current_thread().name][self.__oxid]['currentBinding'] = iid
