@@ -1263,7 +1263,6 @@ class INTERFACE:
                         if strBinding['aNetworkAddr'].find('[') >= 0:
                             binding, _, bindingPort = strBinding['aNetworkAddr'].partition('[')
                             bindingPort = '[' + bindingPort
-                            print(f'SMB strBinding port: {bindingPort}')
                         else:
                             binding = strBinding['aNetworkAddr']
                             bindingPort = ''
