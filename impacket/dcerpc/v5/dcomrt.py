@@ -1301,7 +1301,6 @@ class INTERFACE:
                 dce = dcomInterface.get_dce_rpc()
 
                 if iid is None:
-                    print('raise IID is None')
                     raise Exception('IID is None')
                 else:
                     dce.set_auth_level(self.__cinstance.get_auth_level())
