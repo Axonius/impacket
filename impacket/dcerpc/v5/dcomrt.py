@@ -1247,7 +1247,6 @@ class INTERFACE:
                     INTERFACE.CONNECTIONS[self.__target][current_thread().name][self.__oxid]['currentBinding'] = iid
             else:
                 stringBindings = self.get_cinstance().get_string_bindings()
-                print(f'SMB stringBindings: {stringBindings}')
                 # No OXID present, we should create a new connection and store it
                 stringBinding = None
                 isTargetFQDN = self.is_fqdn()
