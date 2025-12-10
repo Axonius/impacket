@@ -64,7 +64,8 @@ setup(
     long_description_content_type="text/markdown",
     platforms=["Unix", "Windows"],
     packages=['impacket', 'impacket.dcerpc', 'impacket.dcerpc.v5', 'impacket.dcerpc.v5.dcom',
-              'impacket.krb5', 'impacket.ldap', 'impacket.mssql'],
+              'impacket.krb5', 'impacket.ldap', 'impacket.mssql', 'impacket.examples',
+              'impacket.examples.ntlmrelayx.utils'],
     scripts=glob.glob(os.path.join('examples', '*.py')),
     data_files=data_files,
 
